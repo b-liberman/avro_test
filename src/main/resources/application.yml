@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: AvroTest
+  data:
+    mongodb:
+      uri: mongodb+srv://boris:qwe321@cluster0-bp4qe.mongodb.net/myFirstDB?streamType=netty&ssl=true
+
+logging:
+  level:
+    boris: DEBUG
+
+server:
+  port: 8083
+
+avroTest:
+  kafka:
+    bootstrapServers: localhost:29092
+#   zkServers: localhost:32181
+    schemaRegistry: http://localhost:8081
+    stringPersonTopic: borisTestStringPerson
+    baStringIntTopic: borisTestStringIntBA
+    rhStringIntTopic: borisTestStringIntRH
+    streams:
+      applicationId: avroTest1
