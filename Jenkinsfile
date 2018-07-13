@@ -22,7 +22,7 @@ node  {
 	}
 	
 	stage('set tag in GIT') {
-    	sh "git tag ${jarFileName}/${jarFileVersion} -m 'automatic jenkins tag 123'"
+    	sh "git tag ${jarFileName}/${jarFileVersion} -m 'automatic jenkins tag 1231'"
     	sh "git push origin master --tags"
 	}
 }
