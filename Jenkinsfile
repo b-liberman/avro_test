@@ -6,7 +6,7 @@ node  {
 	
 	stage('clone repository') {
 		def scmVars = checkout scm
-		echo "building ${scmVars.GIT_BRANCH}"
+		scmVars.each { k, v -> echo "*** ${k}:${v}"}
 	}
 	
 	jarFileName = 'avro_test'
