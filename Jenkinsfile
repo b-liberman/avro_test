@@ -27,7 +27,7 @@ node  {
 	
 		if(env.BRANCH_NAME == 'master') {
 			
-			scm.getUserRemoteConfigs().each { k, v -> echo "#### ${k}:${v}"}
+			echo "####" + scm.getUserRemoteConfigs()[0]
 			
 			def tag = "${jarFileName}/${jarFileVersion}"
 			sh "git tag -a ${tag} -m 'automatic jenkins tag 1231 Development MB AA'"
