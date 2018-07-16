@@ -25,7 +25,7 @@ node  {
 	
 	stage('set tag in GIT') {
 	
-		if("master".equals(scmVars.get("GIT_BRANCH")) {
+		if(env.BRANCH_NAME == 'master') {
 			sh "git tag ${jarFileName}/${jarFileVersion} -m 'automatic jenkins tag 1231 Development MB'"
     		sh "git push origin master --tags"	
 		} else {
