@@ -23,7 +23,7 @@ node  {
     		app = docker.build("boris/avrotest:${currentBuild.number}", "--build-arg jarFileName=${jarFileName} --build-arg jarFileVersion=${jarFileVersion} .")
 	}
 	
-	stage('set tag in GIT') {
+	stage('set tag in GIT') {	
 	
 		if(env.BRANCH_NAME == 'master') {
 			
@@ -34,8 +34,6 @@ node  {
 						
 			withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: "b-liberman", usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
      		   	def authenticatedUrl = authenticatedUrl(repositoryUrl, env.USERNAME, env.PASSWORD)
-     		   	echo "*** RU: ${repositoryUrl}"
-        		echo "*** AU: ${authenticatedUrl}"
         		sh("git remote set-url origin ${authenticatedUrl}")
         		sh("git push origin tag ${tag}")
     		
@@ -44,6 +42,10 @@ node  {
 			echo "do nothing in any branch but master"
 		}
     	
+	}
+	
+	stage('print environment') {
+		env.each{ k, v -> echo "--------------- ${k}:${v}"}
 	}
 }
 
