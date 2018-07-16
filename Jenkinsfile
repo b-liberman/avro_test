@@ -45,7 +45,7 @@ node  {
 	}
 	
 	stage('print environment') {
-		env.each{ k, v -> echo "--------------- ${k}:${v}"}
+		env.getEnvironment().each{ k, v -> echo "--------------- ${k}:${v}"}
 	}
 }
 
