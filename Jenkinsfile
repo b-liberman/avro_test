@@ -26,9 +26,9 @@ node  {
 	stage('set tag in GIT') {
 	
 		if(env.BRANCH_NAME == 'master') {
-			sh "git tag ${jarFileName}/${jarFileVersion} -m 'automatic jenkins tag 1231 Development MB AA'"
-			sh "git commit -m 'tag set'"
-    		sh "git push origin master"
+			def tag = "${jarFileName}/${jarFileVersion}"
+			sh "git tag ${tag} -m 'automatic jenkins tag 1231 Development MB AA'"
+    		sh "git push origin ${tag}"
 		} else {
 			echo "do nothing in any branch but master"
 		}
