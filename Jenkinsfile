@@ -27,6 +27,7 @@ node  {
 	
 		if(env.BRANCH_NAME == 'master') {
 			sh "git tag ${jarFileName}/${jarFileVersion} -m 'automatic jenkins tag 1231 Development MB AA'"
+			sh "git commit -m 'tag set'"
     		sh "git push origin master"
 		} else {
 			echo "do nothing in any branch but master"
