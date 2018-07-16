@@ -27,8 +27,6 @@ node  {
 	
 		if(env.BRANCH_NAME == 'master') {
 			
-			echo "####" + scm.getUserRemoteConfigs()[0].getUrl()
-			
 			def tag = "${jarFileName}/${jarFileVersion}"
 			sh "git tag -a ${tag} -m 'automatic jenkins tag 1231 Development MB AA'"
 
@@ -38,8 +36,8 @@ node  {
      		   	def authenticatedUrl = authenticatedUrl(repositoryUrl, env.USERNAME, env.PASSWORD)
      		   	echo "*** RU: ${repositoryUrl}"
         		echo "*** AU: ${authenticatedUrl}"
-        		sh("git remote set-url origin ${authenticatedUrl} &> /dev/null")
-        		sh("git push origin tag ${tag} &> /dev/null")
+        		sh("git remote set-url origin ${authenticatedUrl}")
+        		sh("git push origin tag ${tag}")
     		
     		}
 		} else {
