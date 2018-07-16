@@ -34,6 +34,8 @@ node  {
 						
 			withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: "b-liberman", usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
      		   	def authenticatedUrl = authenticatedUrl(repositoryUrl, env.USERNAME, env.PASSWORD)
+     		   	echo "*** RU: ${repositoryUrl}"
+        		echo "*** AU: ${authenticatedUrl}"
         		sh("git remote set-url origin ${authenticatedUrl} &> /dev/null")
         		sh("git push origin tag ${tag} &> /dev/null")
     		
