@@ -26,9 +26,16 @@ node  {
 	stage('set tag in GIT') {
 	
 		if(env.BRANCH_NAME == 'master') {
+			
 			def tag = "${jarFileName}/${jarFileVersion}"
-			sh "git tag ${tag} -m 'automatic jenkins tag 1231 Development MB AA'"
-    		sh "git push origin ${tag}"
+			sh "git tag -a ${tag} -m 'automatic jenkins tag 1231 Development MB AA'"
+						
+			withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: "b-liberman", usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+     		   	def authenticatedUrl = git.authenticatedUrl(repositoryUrl, env.USERNAME, env.PASSWORD)
+        		sh("git remote set-url origin ${authenticatedUrl} &> /dev/null")
+        		sh("git push origin tag ${tag} &> /dev/null")
+    		
+    		}
 		} else {
 			echo "do nothing in any branch but master"
 		}
