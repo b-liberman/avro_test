@@ -1,11 +1,13 @@
 node  {
 
+	def scmVars
+
 	stage('start') {
 		echo "Starting pipeline triggered by git"
 	}
 	
 	stage('clone repository') {
-		def scmVars = checkout scm
+		scmVars = checkout scm
 		scmVars.each { k, v -> echo "*** ${k}:${v}"}
 	}
 	
@@ -22,7 +24,13 @@ node  {
 	}
 	
 	stage('set tag in GIT') {
-    	sh "git tag ${jarFileName}/${jarFileVersion} -m 'automatic jenkins tag 1231 Development MB'"
-    	sh "git push origin master --tags"
+	
+		if("master".equals(scmVars.get("GIT_BRANCH")) {
+			sh "git tag ${jarFileName}/${jarFileVersion} -m 'automatic jenkins tag 1231 Development MB'"
+    		sh "git push origin master --tags"	
+		} else {
+			echo "do nothing in any branch but master"
+		}
+    	
 	}
 }
