@@ -44,10 +44,6 @@ node  {
 		}
     	
 	}
-	
-	stage('print environment') {
-		env.getEnvironment().each{ k, v -> echo "--------------- ${k}:${v}"}
-	}
 }
 
 def authenticatedUrl(url, username, password){
