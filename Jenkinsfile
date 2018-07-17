@@ -20,7 +20,8 @@ node  {
 	}
 	
 	stage('build docker image') {
-    		app = docker.build("boris/avrotest:${currentBuild.number}", "--build-arg jarFileName=${jarFileName} --build-arg jarFileVersion=${jarFileVersion} .")
+    		image = docker.build("boris/avrotest:${currentBuild.number}", "--build-arg jarFileName=${jarFileName} --build-arg jarFileVersion=${jarFileVersion} .")
+    		echo "---------Image id is ${image.imageName()}"
 	}
 	
 	stage('set tag in GIT') {	
