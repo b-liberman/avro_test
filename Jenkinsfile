@@ -32,6 +32,10 @@ node  {
     		sh "pwd"
     		sh "ls -la"
     	}
+    	
+    	docker.image('redis:3.0.7-alpine').inside {
+            sh "ls -la"
+        }
 	}
 	
 	stage('set tag in GIT') {	
