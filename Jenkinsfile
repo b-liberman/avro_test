@@ -19,9 +19,18 @@ node  {
     	sh "./gradlew -PjarFileName=${jarFileName} -PjarFileVersion=${jarFileVersion} clean build test"
 	}
 	
+	def image
+	
 	stage('build docker image') {
     		image = docker.build("boris/avrotest:${currentBuild.number}", "--build-arg jarFileName=${jarFileName} --build-arg jarFileVersion=${jarFileVersion} .")
-    		echo "---------Image id is ${image.imageName()}"
+    		echo "---------Image name is ${image.imageName()}"
+    		echo "---------Image id is ${image.id}"
+	}
+	
+	stage('test in docker') {
+    	image.inside() {
+    		sh "ls -la"
+    	}	
 	}
 	
 	stage('set tag in GIT') {	
