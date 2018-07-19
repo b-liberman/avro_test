@@ -29,6 +29,7 @@ node  {
 	
 	stage('test in docker') {
     	docker.image("boris/avrotest:${currentBuild.number}").inside() {
+    		sh "pwd"
     		sh "ls -la"
     	}
 	}
