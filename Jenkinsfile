@@ -28,9 +28,9 @@ node  {
 	}
 	
 	stage('test in docker') {
-    	image.inside() {
+    	docker.image("boris/avrotest:${currentBuild.number}").inside() {
     		sh "ls -la"
-    	}	
+    	}
 	}
 	
 	stage('set tag in GIT') {	
